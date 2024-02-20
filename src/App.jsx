@@ -11,6 +11,7 @@ import Login from './Components/Pages/Login'
 import Signup from './Components/Pages/Signup';
 import Layout from './Layout';
 import './App.css'
+import Product from './Components/Pages/Product';
 
 function App() {
 
@@ -23,7 +24,7 @@ function App() {
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path='/products'>
+          <Route path='/products' element={<Product />}>
             <Route index element={<About />} ></Route>
             <Route path=':id' element={<h1>specific product</h1>}></Route>
           </Route>

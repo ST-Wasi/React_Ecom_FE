@@ -2,7 +2,11 @@ import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
+import {useNavigate} from 'react-router-dom'
+
 function Login() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -13,6 +17,8 @@ const handleSubmit = async (e)=>{
   axios.post(`${import.meta.env.VITE_API_URL}/login`,formData).then((res)=>{
     toast.success(res.data.msg)
     localStorage.setItem("token", res.data.token)
+    navigate('/products')
+    console.log(res.data)
     })
     .catch((err)=>{
       toast.error("Invalid Email Or Password")
@@ -29,6 +35,13 @@ const handleChange = (e)=>{
   })
 }
 
+useEffect(()=>{
+  const token = localStorage.getItem('token');
+  if(token){
+    toast.success("Already LoggedIn")
+    navigate('/products');
+  }
+},[])
 
 
   return (

@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+
 function Hero() {
+
   return (
     <React.Fragment>
       <div className="relative isolate px-6 pt-14 lg:px-8">
