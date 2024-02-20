@@ -1,9 +1,10 @@
 import { headers } from 'next/dist/client/components/headers';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Dialog } from '@headlessui/react'
 import { RxHamburgerMenu } from "react-icons/rx";
 import { RxCross2 } from "react-icons/rx";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const navigation = [
     { name: 'Product', to: '/product' },
@@ -13,8 +14,35 @@ const navigation = [
 ];
 
 function Navbar() {
-  console.log('navbar',window.location.pathname)
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const [loginButton, setLoginButton] = useState("");
+  const [loginButtonHref, setLoginButtonHref] = useState("");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(()=>{
+    const token = localStorage.getItem('token');
+    if(token){
+      setLoginButton("Logout")
+      setLoginButtonHref('/logout')
+    }
+    else{
+      setLoginButton("Login")
+      setLoginButtonHref('/logout')
+    }
+  },[])
+
+  const handleLoginClick = (e)=>{
+    e.preventDefault()
+    const token = localStorage.getItem('token');
+    if(token){
+      localStorage.removeItem('token');
+      navigate('/');
+      setLoginButton('Login')
+      toast.success("Logged Out")
+    } else{
+      navigate('/login')
+    }
+  }
 
     return (
         <header className="inset-x-0 top-0 z-50">
@@ -47,9 +75,9 @@ function Navbar() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Link to="#" className="text-sm font-semibold leading-6 text-gray-900">
-              Log in <span aria-hidden="true">&rarr;</span>
-            </Link>
+            {loginButton && (<button to="#" onClick={handleLoginClick} className="text-sm font-semibold leading-6 text-gray-900">
+              {loginButton} <span aria-hidden="true">&rarr;</span>
+            </button>)}
           </div>
         </nav>
         <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -87,12 +115,13 @@ function Navbar() {
                   ))}
                 </div>
                 <div className="py-6">
-                  <Link
-                    to="/login"
+                  {loginButton && (<Link
+                    to='#'
+                    onClick={handleLoginClick}
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
-                    Log in
-                  </Link>
+                    {loginButton}
+                  </Link>)}
                 </div>
               </div>
             </div>
