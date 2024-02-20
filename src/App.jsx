@@ -16,7 +16,7 @@ import Product from './Components/Pages/Product';
 function App() {
 
   return (
-    <div>
+    <>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
@@ -30,7 +30,7 @@ function App() {
           </Route>
         </Routes>
         <ToastContainer />
-    </div>
+    </>
   )
 }
 
