@@ -11,6 +11,7 @@ const navigation = [
     { name: 'Features', to: '/features' },
     { name: 'Marketplace', to: '/marketplace' },
     { name: 'Company', to: '/company' },
+    {name: 'New',to:'/new'}
 ];
 
 function Navbar() {
