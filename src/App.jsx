@@ -21,13 +21,13 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="about" element={<About />} />
+            <Route path='/products' element={<Product />}>
+            {/* <Route index element={<About />} ></Route> */}
+            <Route path=':id' element={<h1>specific product</h1>}></Route>
+          </Route>
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path='/products' element={<Product />}>
-            <Route index element={<About />} ></Route>
-            <Route path=':id' element={<h1>specific product</h1>}></Route>
-          </Route>
         </Routes>
         <ToastContainer />
     </>
