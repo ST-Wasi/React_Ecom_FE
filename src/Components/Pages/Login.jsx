@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import {useNavigate} from 'react-router-dom'
+import { jwtDecode } from 'jwt-decode';
 
 function Login() {
   const navigate = useNavigate();
@@ -38,7 +39,8 @@ const handleChange = (e)=>{
 useEffect(()=>{
   const token = localStorage.getItem('token');
   if(token){
-    toast.success("Already LoggedIn")
+    const {id,email,name} = jwtDecode(token)
+    toast.success(`Welcome ${name}`)
     navigate('/products');
   }
 },[])
