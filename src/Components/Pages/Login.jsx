@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import {useState,useEffect} from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
@@ -21,6 +21,7 @@ const handleSubmit = async (e)=>{
     navigate('/products')
     })
     .catch((err)=>{
+      console.error(err)
       toast.error("Invalid Email Or Password")
     })
 }
@@ -38,11 +39,11 @@ const handleChange = (e)=>{
 useEffect(()=>{
   const token = localStorage.getItem('token');
   if(token){
-    const {id,email,name} = jwtDecode(token)
+    const {name} = jwtDecode(token)
     toast.success(`Welcome ${name}`)
     navigate('/products');
   }
-},[])
+},[navigate])
 
 
   return (

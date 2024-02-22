@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom'
-import { jwtDecode } from 'jwt-decode';
 
 
 
@@ -68,7 +67,7 @@ function Product() {
       document.removeEventListener('contextmenu', handleContextmenu)
     }
 
-  }, [])
+  }, [navigate])
 
   return (
     <div>

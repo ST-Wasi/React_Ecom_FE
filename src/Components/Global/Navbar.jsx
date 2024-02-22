@@ -1,5 +1,4 @@
-import { headers } from 'next/dist/client/components/headers';
-import React, { useState,useEffect } from 'react';
+import { useState,useEffect } from 'react';
 import { Dialog } from '@headlessui/react'
 import { RxHamburgerMenu } from "react-icons/rx";
 import { RxCross2 } from "react-icons/rx";
@@ -17,18 +16,18 @@ const navigation = [
 function Navbar() {
   const navigate = useNavigate();
   const [loginButton, setLoginButton] = useState("");
-  const [loginButtonHref, setLoginButtonHref] = useState("");
+  // const [loginButtonHref, setLoginButtonHref] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(()=>{
     const token = localStorage.getItem('token');
     if(token){
       setLoginButton("Logout")
-      setLoginButtonHref('/logout')
+      // setLoginButtonHref('/logout')
     }
     else{
       setLoginButton("Login")
-      setLoginButtonHref('/logout')
+      // setLoginButtonHref('/logout')
     }
   },[])
 

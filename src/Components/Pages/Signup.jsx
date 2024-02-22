@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
@@ -26,11 +26,12 @@ function Signup() {
 
   const handleSubmit = (e)=>{
     e.preventDefault();
-    axios.post(`${import.meta.env.VITE_API_URL}/signup`,formData).then((res)=>{
+    axios.post(`${import.meta.env.VITE_API_URL}/signup`,formData).then(()=>{
       toast.success("Account Created. Please Login Now")
       navigate('/login')
     })
     .catch((err)=>{
+      console.error(err)
       toast.error('Unexpected Error Occured. Try After Somoetime')
     })
   }
@@ -41,7 +42,7 @@ function Signup() {
       toast.success("Already LoggedIn")
       navigate('/products')
     }
-  }, [])
+  }, [navigate])
   
 
 
