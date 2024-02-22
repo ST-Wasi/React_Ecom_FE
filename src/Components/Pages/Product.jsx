@@ -43,19 +43,18 @@ function Product() {
     if (token) {
       axios.get(`${import.meta.env.VITE_API_URL}/products`, {
         headers: {
-          Authorization: `${token}`
+          Authorization: `Bearer ${token}`
         }
       })
         .then((res) => {
           if (res.data.length > 0) {
             setProducts(res.data)
-            console.log(res.data);
           } else {
             setProducts(prdcts)
           }
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
         })
     } else {
       toast.error('Login Required')
@@ -77,8 +76,8 @@ function Product() {
         {products && products.map((item, index) => (<div key={index} className="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96">
           <div className="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-96">
             <img
-              src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=927&amp;q=80"
-              alt="card-image" class="object-cover w-full h-full" />
+              src={item.image}
+              alt="card-image" className="object-cover w-full h-full" />
           </div>
           <div className="p-6">
             <div className="flex items-center justify-between mb-2">
@@ -101,7 +100,6 @@ function Product() {
             </button>
           </div>
         </div>))}
-        // we are implem 6:17 --- 17:22
       </div>
     </div>
   )

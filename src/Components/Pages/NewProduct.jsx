@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-
+import { toast } from 'react-toastify';
+import {useNavigate} from 'react-router-dom'
 
 function NewProduct() {
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         name: "",
         description: "",
@@ -11,7 +13,7 @@ function NewProduct() {
         category: "",
         stock: 0,
         isPopular: false,
-        isNew: false
+        isNewItem: false
     })
 
     const handleChange = (e) => {
@@ -39,9 +41,10 @@ function NewProduct() {
                 'Authorization': `Bearer ${token}`
             }
         }).then((res)=>{
-            console.log(res.data);
+            toast.success(res.data.msg)
+            navigate('/products')
         }).catch((err)=>{
-            console.log('Error occured',err);
+            console.error(err);
         })
     }
 
@@ -222,13 +225,13 @@ function NewProduct() {
                             </div>
 
                             <div className="sm:col-span-2">
-                                <label htmlFor="isNew" className="block text-sm font-medium leading-6 text-gray-900">
-                                    isNew
+                                <label htmlFor="isNewItem" className="block text-sm font-medium leading-6 text-gray-900">
+                                isNewItem
                                 </label>
                                 <div className="mt-2 flex items-center space-x-4">
                                     <input
                                         type="radio"
-                                        name="isNew"
+                                        name="isNewItem"
                                         id="isNewTrue"
                                         onChange={handleChange}
                                         className="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
@@ -239,7 +242,7 @@ function NewProduct() {
                                     </label>
                                     <input
                                         type="radio"
-                                        name="isNew"
+                                        name="isNewItem"
                                         id="isNewFalse"
                                         onChange={handleChange}
                                         className="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"

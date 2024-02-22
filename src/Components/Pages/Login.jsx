@@ -19,7 +19,6 @@ const handleSubmit = async (e)=>{
     toast.success(res.data.msg)
     localStorage.setItem("token", res.data.token)
     navigate('/products')
-    console.log(res.data)
     })
     .catch((err)=>{
       toast.error("Invalid Email Or Password")
