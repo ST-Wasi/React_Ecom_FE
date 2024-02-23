@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify';
 import {useNavigate} from 'react-router-dom'
+import { jwtDecode } from 'jwt-decode';
 
 function NewProduct() {
     const navigate = useNavigate()
@@ -47,6 +48,17 @@ function NewProduct() {
             console.error(err);
         })
     }
+
+    useEffect(()=>{
+        const token = localStorage.getItem('token');
+        const {user} = jwtDecode(token);
+        if(user.role !== 'seller'){
+            toast.error("You are Not A Seller");
+            navigate('/products')
+        } else{
+            toast.info("You can Add new Products Here")
+        }
+    },[])
 
 
     return (
