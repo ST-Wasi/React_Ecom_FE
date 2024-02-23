@@ -73,7 +73,7 @@ function Navbar() {
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
           {navigation.map((item) => {
-            if (item.name === 'New' && user && user.role !== 'seller') {
+            if (item.name === 'New' && (!user || (user && user.role !== 'seller'))) {
               return null;
             }
             return (
@@ -114,7 +114,7 @@ function Navbar() {
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                 {navigation.map((item) => {
-                  if (item.name === 'New' && user && user.role !== 'seller') {
+                  if (item.name === 'New' && (!user || (user && user.role !== 'seller'))) {
                     return null;
                   }
                   return (
